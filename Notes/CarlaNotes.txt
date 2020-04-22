@@ -1,0 +1,21 @@
+Carla: Udacity's Self-Driving Car
+
+    Waypoints: Target Navigation Points 
+        - Used to Avoid Obstacles and Stop at Traffic Lights
+        
+        What are Waypoints:
+            Ans: Ordered set of coordinates that Karla uses to plan a path around the track
+        
+            - Each waypoint also has an associated target velocity
+            - Planning subsytsem  updates the target velocity for waypoints ahead of vehicle
+             depending on desired vehicle location.
+            - Control subsytsem navigates the waypoints with the correct target velocity
+            
+
+    Perception Subsystem: Traffic Light and Obstacle Detection Node
+
+    Planning Subsystem: Waypoint Updater Node
+        - Recieves Info from Perception and slows down if there is a red light for e.g
+    
+    Control Subsystem: Drive by Wire ROS Node
+        - Takes target trajectory information as input and send controls command

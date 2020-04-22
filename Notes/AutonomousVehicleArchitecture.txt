@@ -1,0 +1,99 @@
+Vehicle Subsystems:
+
+    1. Sensors
+        a. Radar
+        b. Lidar
+        c. GPS
+
+    2. Perception
+        a. Software to process sensor data.
+        b. Takes output of sensor data to make meaningful information
+    
+    3. Planning 
+        a. Output from Perception for Behavioural Planning
+        b. Path Planning - Short and Long Range
+    
+    4. Control
+        a. Ensure follows path from planning subsystem
+        b. Send control commands to the vehicle
+
+    FLOW: Sensors -> Perception -> Planning -> Control
+
+
+Subsystem: Sensors
+    - Sensors are the hardware components your car uses to observe the world.
+    - Which sensors belong on the sensor Subsystem?
+        Ans: GPS, IMU, Radar, and Ultrasonic Sensors.
+
+Subsystem: Perception
+    - Process data from sensors into structured information.
+    - Info can then be used by path planning or control.
+
+    Perception Subsystem A: Detection
+        - Responsible for understanding world around it
+        - Detection Types: Object, Lane, Traffic Sign, Traffic Light, Free Space
+        - Components: Camera, Radar, Lidar
+
+    Perception Subsystem B: Localization
+        - Responsible for using sensor and map data to determine vehicle's location
+        - Lidar is primarily used for Localization
+
+    How are Sensor Subsystem and Perception Subsystem connected?
+
+    Perception:
+        1. Lane Detection - Camera
+        2. Traffic Light Detection & Classification - Camera
+        3. Traffic Sign Detection & Classification - Camera
+        4. Object Detection and Tracking - Lidar, Camera, Radar
+        5. Free Space Detection - Lidar
+        6. Localization (Where am I?) - Lidar, GPS
+
+Subsystem: Planning
+
+    Planning Subsystems
+
+        1. Route Planning
+            - Responsible for high-level decisions about the path of the 
+                vehicle between two points on a map.
+            - Component is similar to the route planning feature found on 
+                many smartphones or modern car navigation systems.
+            
+        2. Prediction
+            - Prediction component estimates what actions other objects might 
+                take in the future. 
+            - If another vehicle were identified, the prediction component 
+                would estimate its trajectory
+
+        3. Behavioural Planning
+            -  Behavioural planning component determines what behaviour the vehicle 
+                should exhibit at any point in time
+            -  E.g Lane Change, Accelerating, Making left turn, all maneuvers.
+
+        4. Trajectory Planning
+            -  Based on the desired immediate behaviour, the trajectory planning component 
+                will determine which trajectory is best for executing this behaviour.
+
+        What perception components provide useful info about the prediction component?
+            Ans: Lane Detection, Free Space Detection, Vehicle Detection, 
+                Traffic Sign Classification, Localization.
+
+        What perception components provide useful info about the behaviour planning component?
+            Ans: Lane Detection, Free Space Detection, Vehicle Detection, 
+                Traffic Sign Classification, Localization.
+
+        
+        Planning:
+            Route Planning  - Map 
+            Prediction - Lane Detection, Traffic Light & Object Detection
+            Behavioural Planning - Lane Detection, Free Space Detection, 
+                                Traffic Sign Classification, Localization.
+            Trajectory Planning - Lane Detection, Object Detection, Free Space Detection
+
+Subsystem: Control 
+
+    - Software to ensure plan is executed by car. May include:
+        1. PID Controller
+        2. Model Predictive Controller
+        3. Other Controllers
+
+        Sends: Acceleration, Braking, Steering Data

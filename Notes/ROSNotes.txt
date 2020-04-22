@@ -1,0 +1,160 @@
+Robotic Operating System
+
+    What is it?
+        Ans: Open source software framework for robotics development
+    
+    Why is it useful?
+        - Provides a mean to taking to hardware without device driver
+        - Allows processes to communicate via message passing
+        - Slick package management system allowing deployable software
+    
+    Nodes and Topics:
+        - Basic Characteristics: Perception, Decision Making, Actuation
+        
+        Node: responsible for a portion the robot's overall functionality
+            E.g Nodes for: Wheel Encoder, Camera, Pose Estimation, Behaviour Execution, Motion Control
+        
+        - At the centre is the ROS Master, which is responsible for maintaining
+          and managing all active node in the system.
+            1. Allowing nodes to connect and communicate.
+            2. Hosting a parameter service 
+
+        Topics: Means of communication (Pub Sub Architecture)
+            - Nodes publish to topics to send messages.
+            - Nodes subscribe to topics to receive messages.
+
+    Message Passing:
+        - There are many Msg Types (200 Msg Types)
+            A. Physical Quantities (Vel, Acc, Pos, Rot)
+            B. Sensor Measurements (Laser Scans, Imgs, Point Cloud, Inertial Measurements)
+            C. Custom
+        
+            In our case:
+                Camera Node - Camera Image Msg [/camera_images (topic)] 
+                Position Estimator - Rotation Msg [/wheel_encoder (topic)]
+            
+            ROS Services:
+                - Use a request and response message on 1 to 1 basis
+                - Pass in a request via one node, receive a response via another node.
+
+            Compute Graph:
+                - Diagram of how all nodes & topics are connected.
+                - ROS provides a RQT Tool to see the compute graph
+            
+            Sourcing ROS Environment:
+                - Ensure all ROS variables have been set
+                - Each ROS Distribution provides a setup script in opt/ros
+                - Run 'source opt/ros/kinetic/setup.bash'
+                - Place this command in .bashrc file to run everytime a bash session starts
+                    'echo "source opt/ros/kinetic/setup.bash" >> ~/.bashrc'
+            
+            ROS Commands:
+                1. roscore #Initialize ROSMaster
+                2. rosnode list #List all running nodes
+                    - rosout is a node automatically ran to record data to a log file
+                3. rostopic list #List all running topics
+                4. rostopic info $topic #Display's a topics Publisher, Subscriber, Msg
+                5. rosmsg show $pkg_name/msgtype #Display Elements of a msg
+                6. rosed $pkg_name $msg_file #Display Msg information
+                7. rostopic echo $topic #Display every msg that is published
+
+            Creating a Catkin Workspace
+                1. $ mkdir -p ~/catkin_ws/src
+                2. $ cd ~/catkin_ws/src
+                3. $ catkin_init_workspace #Initialize
+                4. $ catkin_make #from workspace directory not src
+
+            Adding Packages
+                1. cd ~/catkin_ws/src
+                2. catkin_create_pkg <your_package_name> [dependency1 dependency2 …]
+                3. catkin_make
+                4. source devel/setup.bash
+
+
+            Roslaunch
+                Roslaunch allows you to do the following:
+                    1. Launch ROS Master and multiple nodes with one simple command
+                    2. Set default parameters on the parameter server
+                    3. Automatically re-spawn processes that have died
+
+                roslaunch simple_arm robot_spawn.launch
+
+            Rosdep Tool
+                ROS packages have two different types of dependencies: build dependencies, and run dependencies. 
+                Often one may be missing dependencies, such causing an error.
+
+                The rosdep tool will check for a package's missing dependencies, download them, and install them.
+
+                1. $ rosdep check simple_arm 
+                2. $ rosdep install -i simple_arm #install missing packages
+            
+            Architecture of ROS Packages:
+
+                Elements:
+
+                scripts (python executables)
+                src (C++ source files)
+                msg (for custom message definitions)
+                srv (for service message definitions)
+                include -> headers/libraries that are needed as dependencies
+                config -> configuration files
+                launch -> provide a more automated way of starting nodes
+
+            
+            ROS Publishers:
+
+                - Publishers allow a node to send messages to a topic, so that data 
+                from the node can be used in other parts of the ROS system.
+
+                Definition: 
+                    pub1 = rospy.Publisher("/topic_name", message_type, queue_size=size)
+
+                Publishers can be asynchronous or synchronous:
+
+                    Synchronous:
+                        - Publisher will attempt to publish to a topic but may be blocked if 
+                        that topic is being published to by a different publisher
+                        - Second publisher is blocked/rejected until the first publisher has serialized all messages of a buffer.
+                        - Default if queue_size is not used or set to None.
+
+                    Asynchronous
+                        - Publishers can store messages in a queue until messages can be sent.
+                        - If queue size is exceeded, the oldest message will be dropped
+
+                Once the publisher is created, one can publish a msg using:
+                    
+                    pub1.publish(message)
+
+
+            Ros Services:
+
+                - Service allows request/response communication to exist between nodes. Within the node providing the service,
+                    request messages are handled by functions or methods.
+                - After the request is handled, the request is sent back to the requester
+
+                Definition:
+                    service = rospy.Service('service_name', serviceClassName, handler)
+
+                    - service_name -> name of service
+                    - serviceClassName -> type of service (defined by file of .srv)
+                    - Handler -> name of function that handles request
+                
+                Calling the service:
+                    msg = serviceClassNameRequest() #initialize instance of service
+                    response = service_name(msg)
+                
+                
+            Ros Subscribers:
+
+                - Subscriber enables your node to read messages from a topic, 
+                    allowing useful data to be streamed into the node.
+
+                Definition:
+                    sub1 = rospy.Subscriber("/topic_name", message_type, callback_function)
+                    
+                    - The "/topic_name" indicates which topic the Subscriber should listen to.
+                    - The message_type is the type of message being published on "/topic_name"
+                    - The callback_function is the name of the function that should be called with each incoming message
+                    - Note that unlike service handler functions, the callback_function is not required to return anything.
+
+
