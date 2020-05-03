@@ -12,6 +12,7 @@ import rospkg
 import math
 
 class TLPublisher(object):
+    
     def __init__(self):
         rospy.init_node('tl_publisher')
 
@@ -25,12 +26,14 @@ class TLPublisher(object):
         self.loop()
 
     def loop(self):
+        
         rate = rospy.Rate(50)
         while not rospy.is_shutdown():
             self.traffic_light_pubs.publish(self.lights)
             rate.sleep()
 
     def create_light(self, x, y, z, yaw, state):
+        
         light = TrafficLight()
 
         light.header = Header()
@@ -43,6 +46,7 @@ class TLPublisher(object):
         return light
 
     def create_pose(self, x, y, z, yaw=0.):
+        
         pose = PoseStamped()
 
         pose.header = Header()
