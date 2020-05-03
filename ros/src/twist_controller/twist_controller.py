@@ -7,6 +7,7 @@ import rospy
 # ONE_MPH = 0.44704
 
 class Controller(object):
+    
     def __init__(self, param):
 
         # Store Parameters
@@ -35,7 +36,7 @@ class Controller(object):
         # Check if DBW is enabled
         if not dbw_enabled:
             self.throttle_controller.reset()
-            return 0, 0, 0
+            return 0., 0., 0.
 
         # Fitler current_vel
         current_vel = self.vel_lpf.filt(current_vel)

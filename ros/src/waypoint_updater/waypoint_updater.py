@@ -9,7 +9,7 @@ from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import Int32
 from styx_msgs.msg import Lane, Waypoint
 
-LOOKAHEAD_WPS = 200 # Number of waypoints we will publish.
+LOOKAHEAD_WPS = 75 # Number of waypoints we will publish.
 MAX_DECEL = 0.5 # m/s^2 Max Deceleration
 HZ_SETTING = 50 # Hz Publishing Rate
 STOP_NUM_WP_BACK = 2 # How many waypoints must the car stop before light
@@ -56,7 +56,7 @@ class WaypointUpdater(object):
     def waypoints_cb(self, msg):
         #Call back function for waypoints
 
-        self.base_waypoints = msg
+        self.base_lane = msg
         # Initialize self.waypoints_2d before subscriber in order to prevent callback before intialized
         if not self.waypoints_2d:
             self.waypoints_2d = [[waypoint.pose.pose.position.x, waypoint.pose.pose.position.y] 
@@ -114,7 +114,7 @@ class WaypointUpdater(object):
         
         # If the waypoint is behind, use next point
         if val > 0:
-            closest_index = ( closest_index + 1 ) % len(self.waypoints_2d)
+            closest_index = (closest_index + 1) % len(self.waypoints_2d)
         
         return closest_index
     
@@ -159,7 +159,7 @@ class WaypointUpdater(object):
             stop_idx = max(self.stopline_wp_idx - closest_idx - STOP_NUM_WP_BACK, 0)
             distance = self.distance(waypoints, i, stop_idx)
             
-            # Increasing Deceleration per Iteration
+            # Increasing Deceleration per Iteration (Uniform Deceleration): v^2 = 2*a*x
             velocity = math.sqrt(2 * MAX_DECEL * distance)
             if velocity < 1.:
                 velocity = 0.

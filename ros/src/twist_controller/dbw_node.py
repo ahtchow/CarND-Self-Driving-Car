@@ -36,7 +36,7 @@ class DBWNode(object):
     def __init__(self):
         rospy.init_node('dbw_node')
 
-        # Parameeters
+        # Parameters
         self.param = {}
         self.load_param()
 
@@ -50,7 +50,12 @@ class DBWNode(object):
         self.dbw_enabled = None
         self.linear_vel = None
         self.angular_vel = None
-        self.throttle = self.steering = self.brake = 0
+
+        #=========== Control Parameter: To be Published ==========#
+        self.throttle = 0
+        self.brake = 0
+        self.steering = 0
+        #=========== Control Parameter: To be Published ==========#
 
         self.loop()
 
@@ -65,8 +70,8 @@ class DBWNode(object):
 
         # Publishers
         self.steer_pub = rospy.Publisher('/vehicle/steering_cmd', SteeringCmd, queue_size=1)
-        self.throttle_pub = rospy.Publisher('/vehicle/throttle_cmd', ThrottleCmd, queue_size=2)
-        self.brake_pub = rospy.Publisher('/vehicle/brake_cmd', BrakeCmd, queue_size=5)
+        self.throttle_pub = rospy.Publisher('/vehicle/throttle_cmd', ThrottleCmd, queue_size=1)
+        self.brake_pub = rospy.Publisher('/vehicle/brake_cmd', BrakeCmd, queue_size=1)
 
 
     def load_param(self):
@@ -90,6 +95,8 @@ class DBWNode(object):
         rate = rospy.Rate(HZ_SETTING)
 
         while not rospy.is_shutdown():
+
+            # Process Control Parameters
             if not None in (self.current_vel, self.linear_vel, self.angular_vel):
                 self.throttle, self.brake, self.steering = self.controller.control(self.current_vel,
                                                                                    self.dbw_enabled,
