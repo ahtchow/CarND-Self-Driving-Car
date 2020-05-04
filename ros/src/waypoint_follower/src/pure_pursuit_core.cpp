@@ -348,15 +348,15 @@ geometry_msgs::TwistStamped PurePursuit::outputTwist(geometry_msgs::Twist t) con
 geometry_msgs::TwistStamped PurePursuit::go()
 {
   if(!pose_set_ || !waypoint_set_ || !velocity_set_){
-    if(!pose_set_) {
-       ROS_WARN("position is missing");
-     }
-     if(!waypoint_set_) {
-       ROS_WARN("waypoint is missing");
-     }
-     if(!velocity_set_) {
-       ROS_WARN("velocity is missing");
-    }
+  //   if(!pose_set_) {
+  //      ROS_WARN("position is missing");
+  //    }
+  //    if(!waypoint_set_) {
+  //      ROS_WARN("waypoint is missing");
+  //    }
+  //    if(!velocity_set_) {
+  //      ROS_WARN("velocity is missing");
+  //   }
     return outputZero();
   }
 

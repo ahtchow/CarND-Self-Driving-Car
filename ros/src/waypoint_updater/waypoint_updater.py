@@ -27,9 +27,7 @@ class WaypointUpdater(object):
         self.pose = None
         self.stopline_wp_idx = -1
         self.waypoints_2d = None
-        self.waypont_tree = None
-        
-        
+        self.waypoint_tree = None
         
         # Initialize Subscribers and Publishers
         self.init_connections()

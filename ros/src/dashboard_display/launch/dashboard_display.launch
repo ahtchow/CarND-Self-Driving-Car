@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="dashboard_display" type="dashboard_display.py" name="dashboard_display" output="screen" cwd="node"/>
+</launch>

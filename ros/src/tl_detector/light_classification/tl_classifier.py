@@ -94,17 +94,15 @@ class TLClassifier(object):
             # If any RED, send RED:
             if (classes==2).any():
                 state = TrafficLight.RED
-                rospy.loginfo("Traffic Light Classifier Detects: RED LIGHT")
             
             else:
                 counts = np.bincount(classes)
                 most_class = np.argmax(counts)
                 if most_class == 1:
                     state = TrafficLight.GREEN
-                    rospy.loginfo("Traffic Light Classifier Detects: GREEN LIGHT")
                 elif most_class == 3:
                     state = TrafficLight.YELLOW
-                    rospy.loginfo("Traffic Light Classifier Detects: YELLOW LIGHT")
+                
         
         return state
             
