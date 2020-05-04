@@ -18,6 +18,7 @@ STATE_COUNT_THRESHOLD = 3
 class TLDetector(object):
     
     def __init__(self):
+
         rospy.init_node('tl_detector')
 
         self.pose = None
@@ -44,6 +45,7 @@ class TLDetector(object):
         self.config = yaml.load(config_string, Loader=yaml.FullLoader)
 
         self.upcoming_red_light_pub = rospy.Publisher('/traffic_waypoint', Int32, queue_size=1)
+        self.traffic_light_color_pub = rospy.Publisher('/tl_state', TrafficLight, queue_size=1)
 
         self.bridge = CvBridge()
         self.light_classifier = TLClassifier(self.config["is_site"])
@@ -78,9 +80,10 @@ class TLDetector(object):
         """
         self.has_image = True
         self.camera_image = msg
+        tf_msg = TrafficLight()
 
         # Call Processor to Identify the Light Waypoint and its state
-        light_wp, state = self.process_traffic_lights()
+        light_wp, tf_msg.state = self.process_traffic_lights()
 
         '''
         Publish upcoming red lights at camera frequency.
@@ -90,15 +93,15 @@ class TLDetector(object):
         '''
 
         # Initialize State
-        if self.state != state:
+        if self.state != tf_msg.state:
             self.state_count = 0
-            self.state = state
+            self.state = tf_msg.state
         
         # Ensure the is some level in confidence of the state before changing the state
         elif self.state_count >= STATE_COUNT_THRESHOLD:
             self.last_state = self.state
             # If the state of the traffic light is RED then stop, else continue driving
-            light_wp = light_wp if state == TrafficLight.RED else -1
+            light_wp = light_wp if tf_msg.state == TrafficLight.RED else -1
             
             self.last_wp = light_wp
             self.upcoming_red_light_pub.publish(Int32(light_wp))
@@ -107,6 +110,7 @@ class TLDetector(object):
             self.upcoming_red_light_pub.publish(Int32(self.last_wp))
 
         self.state_count += 1
+        self.traffic_light_color_pub.publish(tf_msg)
 
     def get_closest_waypoint(self, x, y):
         """Identifies the closest path waypoint to the given position

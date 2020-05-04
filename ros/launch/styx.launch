@@ -18,6 +18,10 @@
     <!--Traffic Light Detector Node -->
     <include file="$(find tl_detector)/launch/tl_detector.launch"/>
 
+    <!--Dashboard Disply Node -->
+    <include file="$(find dashboard_display)/launch/dashboard_display.launch"/>
+
     <!--Traffic Light Locations and Camera Config -->
     <param name="traffic_light_config" textfile="$(find tl_detector)/sim_traffic_light_config.yaml" />
+
 </launch>
