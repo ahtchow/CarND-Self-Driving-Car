@@ -48,7 +48,7 @@ Carla can be divided into several subsystems:
 
   The project mainly uses the camera images to process information about possible on-coming traffic lights. This information is then processed to the perception sub-system.
 
-  ![Figure 4](./Notes/READ_Imgs/lidar_pc.png)***Figure 4: A visualization of a point cloud mapping provided from a LIDAR sensor.*** *Lidar is one of the many sensor Carla uses to gather information about the world around.*
+  ![Figure 4](./Notes/README_Imgs/lidar_pc.png)***Figure 4: A visualization of a point cloud mapping provided from a LIDAR sensor.*** *Lidar is one of the many sensor Carla uses to gather information about the world around.*
 
 ## 2. Perception
 
@@ -63,6 +63,6 @@ Carla can be divided into several subsystems:
 
   GPS can only localize Carla to within 10 centimeters or less. The car relies on Lidar to determine the precise location. In this project, there is no need to localize the car relative to the objects around it. There are no nearby cars since the car will be tested in a controlled environment.
 
-![Figure 5](./Notes/READ_Imgs/localization.png)***Figure 5: During localization an autonomous vehicle must use GPS and Lidar data.*** *Carla localizes herself by figuring out where she is on a high-definition map*
+![Figure 5](./Notes/README_Imgs/localization.png)***Figure 5: During localization an autonomous vehicle must use GPS and Lidar data.*** *Carla localizes herself by figuring out where she is on a high-definition map*
 
 ## Planning
