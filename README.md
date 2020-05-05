@@ -55,7 +55,7 @@ Carla can be divided into several subsystems:
 
   ![Figure 4](./Notes/README_Imgs/lidar_pc.png)
   
-  ***Figure 4: A visualization of a point cloud mapping provided from a LIDAR sensor.*** *Lidar is one of the many sensor Carla uses to gather information about the world around.*
+  ***Figure 4: A visualization of a point cloud mapping provided from a LIDAR sensor.*** *Lidar is one of the many sensors Carla uses to gather information about the world around.*
 
 ## 2. Perception
 
