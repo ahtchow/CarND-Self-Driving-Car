@@ -28,7 +28,7 @@ Unity Game Engine allows Udacity to provide a simulated environment for students
 
 Upon passing anticipated behaviours on simulation, the software is then ready to be tested on Carla. It is important to note that the environment is signafigantly different from the simulation. To begin, the track is different from what is seen in the simulator which should be fine. In addition, the traffic lights on the real test track were different such that there must be a object detection model taylored to real-life data. (See below)
 
-![Figure 2](./Notes/README_Imgs/carla.png)***Figure 2: Carla, Udacity's Self-Driving Car Platform.*** *Carla is a fully equiped self-driving car with sensors, a perception module, a planning system and controls.*
+![Figure 2](./Notes/README_Imgs/carla.jpg)***Figure 2: Carla, Udacity's Self-Driving Car Platform.*** *Carla is a fully equiped self-driving car with sensors, a perception module, a planning system and controls.*
 
 
 # Carla's Architecture
@@ -40,7 +40,7 @@ Carla can be divided into several subsystems:
   3. Planning
   4. Control
   
-![Figure 3](./Notes/READ_Imgs/carla_architecture.png)***Figure 3: A visualization of Carla's autonomous subsystems.*** *The four modules work independently but exchange data via robot operating system (ROS) nodes.*
+![Figure 3](./Notes/README_Imgs/carla_architecture.png)***Figure 3: A visualization of Carla's autonomous subsystems.*** *The four modules work independently but exchange data via robot operating system (ROS) nodes.*
 
 ## 1. Senors
 
