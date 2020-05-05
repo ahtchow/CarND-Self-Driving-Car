@@ -38,10 +38,10 @@ Upon passing anticipated behaviours on simulation, the software is then ready to
 
 Carla can be divided into several subsystems:
 
-  1. Sensors
-  2. Perception
-  3. Planning
-  4. Control
+  1. ***Sensors***
+  2. ***Perception***
+  3. ***Planning***
+  4. ***Control***
   
 ![Figure 3](./Notes/README_Imgs/carla_architecture.png)
 
@@ -78,19 +78,19 @@ Carla can be divided into several subsystems:
 
   The planning sub-system is in-charge of many subdivisions which determine the ultimate behaviour of the vehicle. Autonomous vehicles must always be planning ahead of time, thus planning is the most computational intensive subsystem.  There are several types of planning that need to be covered.
 
-  1. Route Planning
+  1. ***Route Planning***
     - Responsible for high-level decisions about the path of the vehicle between two points on a map.
     - Component is similar to the route planning feature found on many smartphones or modern car navigation systems.
             
-  2. Prediction Planning
+  2. ***Prediction Planning***
     - Prediction component estimates what actions other objects might take in the future. 
     - If another vehicle were identified, the prediction component would estimate its trajectory
 
-  3. Behavioural Planning
+  3. ***Behavioural Planning***
     -  Behavioural planning component determines what behaviour the vehicle should exhibit at any point in time.
     -  E.g Lane Change, Accelerating, Making left turn, all maneuvers.
 
-  4. Trajectory Planning
+  4. ***Trajectory Planning***
     -  Based on the desired immediate behaviour, the trajectory planning component will determine which trajectory is best for executing this behaviour.
 
   The planning system used in this project follows the basis of ***waypoints***—a series of coordinates that are updated as the car moves through the environment. Whether to stay in lane or to make a left lane change, the waypoints are essentially the commands to tell the car how it should behave for the next several seconds. In this project, the waypoints are constantly updating at 50Hz to ensure the car is constantly fed the most up to date commands.
@@ -103,9 +103,9 @@ Carla can be divided into several subsystems:
 
   The control sub-system is equipped with the task of making sure the plan is executed properly. Two common controllers are the PID Controller and the Model Predictive Controller, in which we learned earlier in the nanodegree. For this project, the following tools are used:
 
-  1. PID Controller
-  2. Yaw Controller
-  3. Low Pass Filter
+  1. ***PID Controller***
+  2. ***Yaw Controller***
+  3. ***Low Pass Filter***
 
   The PID controller is used to monitor the throttle commands sent to Carla, which is done by using feed-back control. Next, the Yaw controller is in charge in sending steering commands based on the offset relative to the current lane. Lastly, there is a low pass filter to remove any noise exeisting from velocity commands to ensure stability. Carla is equipped with a drive-by-wire controller to communicate throttle, steering and braking commands.
 
