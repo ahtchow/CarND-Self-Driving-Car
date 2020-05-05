@@ -30,6 +30,7 @@ Unity Game Engine allows Udacity to provide a simulated environment for students
 Upon passing anticipated behaviours on simulation, the software is then ready to be tested on Carla. It is important to note that the environment is signafigantly different from the simulation. To begin, the track is different from what is seen in the simulator which should be fine. In addition, the traffic lights on the real test track were different such that there must be a object detection model taylored to real-life data. (See below)
 
 ![Figure 2](./Notes/README_Imgs/carla.jpg)
+
 ***Figure 2: Carla, Udacity's Self-Driving Car Platform.*** *Carla is a fully equiped self-driving car with sensors, a perception module, a planning system and controls.*
 
 
@@ -43,6 +44,7 @@ Carla can be divided into several subsystems:
   4. Control
   
 ![Figure 3](./Notes/README_Imgs/carla_architecture.png)
+
 ***Figure 3: A visualization of Carla's autonomous subsystems.*** *The four modules work independently but exchange data via robot operating system (ROS) nodes.*
 
 ## 1. Senors
@@ -51,7 +53,9 @@ Carla can be divided into several subsystems:
 
   The project mainly uses the camera images to process information about possible on-coming traffic lights. This information is then processed to the perception sub-system.
 
-  ![Figure 4](./Notes/README_Imgs/lidar_pc.png)***Figure 4: A visualization of a point cloud mapping provided from a LIDAR sensor.*** *Lidar is one of the many sensor Carla uses to gather information about the world around.*
+  ![Figure 4](./Notes/README_Imgs/lidar_pc.png)
+  
+  ***Figure 4: A visualization of a point cloud mapping provided from a LIDAR sensor.*** *Lidar is one of the many sensor Carla uses to gather information about the world around.*
 
 ## 2. Perception
 
@@ -66,6 +70,8 @@ Carla can be divided into several subsystems:
 
   GPS can only localize Carla to within 10 centimeters or less. The car relies on Lidar to determine the precise location. In this project, there is no need to localize the car relative to the objects around it. There are no nearby cars since the car will be tested in a controlled environment.
 
-![Figure 5](./Notes/README_Imgs/localization.png)***Figure 5: During localization an autonomous vehicle must use GPS and Lidar data.*** *Carla localizes herself by figuring out where she is on a high-definition map*
+![Figure 5](./Notes/README_Imgs/localization.png)
+
+***Figure 5: During localization an autonomous vehicle must use GPS and Lidar data.*** *Carla localizes herself by figuring out where she is on a high-definition map*
 
 ## Planning
