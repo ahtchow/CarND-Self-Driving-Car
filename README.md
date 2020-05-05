@@ -22,13 +22,15 @@ The project operates on two stages: A Unity Simulator and Udacity's Autonomous V
 
 Unity Game Engine allows Udacity to provide a simulated environment for students to test their software on. In this case, the simulator presented a virtual 3D environment with several traffic lanes and traffic lights. As a result, students can perform a validation check to whether their car stays in a given lane or stops before a traffic light. Simulation is a standard measure for testing performance and safety for many automotive applications. Testing software on simulation before implementation on a real autonomous vehicle is the reality that many self-driving car companies such as NVIDIA, Uber and Mercedes. 
 
-![Figure 1](./Notes/README_Imgs/simulation.png)***Figure 1: Simulator showing car under autonomous mode.*** *Carla, Udacity's Autnomous Vehicle, driving in the simulator in autonomous mode. On the left is a dashboard display and a stream of the car's camera.*
+![Figure 1](./Notes/README_Imgs/simulation.png)
+***Figure 1: Simulator showing car under autonomous mode.*** *Carla, Udacity's Autnomous Vehicle, driving in the simulator in autonomous mode. On the left is a dashboard display and a stream of the car's camera.*
 
 ### 2. Carla, Udacity's Self-Driving Car Platform 
 
 Upon passing anticipated behaviours on simulation, the software is then ready to be tested on Carla. It is important to note that the environment is signafigantly different from the simulation. To begin, the track is different from what is seen in the simulator which should be fine. In addition, the traffic lights on the real test track were different such that there must be a object detection model taylored to real-life data. (See below)
 
-![Figure 2](./Notes/README_Imgs/carla.jpg)***Figure 2: Carla, Udacity's Self-Driving Car Platform.*** *Carla is a fully equiped self-driving car with sensors, a perception module, a planning system and controls.*
+![Figure 2](./Notes/README_Imgs/carla.jpg)
+***Figure 2: Carla, Udacity's Self-Driving Car Platform.*** *Carla is a fully equiped self-driving car with sensors, a perception module, a planning system and controls.*
 
 
 # Carla's Architecture
@@ -40,7 +42,8 @@ Carla can be divided into several subsystems:
   3. Planning
   4. Control
   
-![Figure 3](./Notes/README_Imgs/carla_architecture.png)***Figure 3: A visualization of Carla's autonomous subsystems.*** *The four modules work independently but exchange data via robot operating system (ROS) nodes.*
+![Figure 3](./Notes/README_Imgs/carla_architecture.png)
+***Figure 3: A visualization of Carla's autonomous subsystems.*** *The four modules work independently but exchange data via robot operating system (ROS) nodes.*
 
 ## 1. Senors
 
