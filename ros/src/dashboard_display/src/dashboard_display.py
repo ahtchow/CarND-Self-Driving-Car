@@ -28,17 +28,17 @@ class DashboardDisplay(object):
             if(self.is_init):
 
                 print("==============================[  DASHBOARD  ]==============================\n")
-                rospy.loginfo("Steering Angle (Rad):                {0}".format(self.steering))
-                rospy.loginfo("Throttle Command (% of Max):         {0}".format(self.throttle))
-                rospy.loginfo("Braking Force (Nm):                  {0}".format(self.brake))
+                rospy.loginfo("Steering Angle (Rad):                {:.5f}".format(self.steering))
+                rospy.loginfo("Throttle Command (% of Max):         {:.5f}".format(self.throttle))
+                rospy.loginfo("Braking Force (Nm):                  {:.5f}".format(self.brake))
                 rospy.loginfo("Traffic Light Color:                 {0}".format(self.tl_status))
                 rospy.loginfo("Gloabl X-Positon:                    {0}".format(self.pose.pose.position.x))
                 rospy.loginfo("Gloabl Y-Positon:                    {0}".format(self.pose.pose.position.y))
-                rospy.loginfo("Linear Velocity (m/s):               {0}\n\n".format(self.velocity))
+                rospy.loginfo("Linear Velocity (m/s):               {:.5f}\n\n".format(self.velocity))
                 print("==============================[  DASHBOARD  ]==============================\n")
 
             
-            rospy.sleep(.5)
+            rospy.sleep(1.)
 
     def init_connections(self):
 

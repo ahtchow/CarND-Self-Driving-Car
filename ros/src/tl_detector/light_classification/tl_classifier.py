@@ -11,9 +11,8 @@ from cv_bridge import CvBridge
 from styx_msgs.msg import TrafficLight
 from sensor_msgs.msg import Image
 
-THRESHOLD_SCORE = 0.5
-NUM_CLASSES = 4
-
+THRESHOLD_SCORE = 0.6
+NUM_CLASSES = 3
 class TLClassifier(object):
 
     def __init__(self, is_site):
@@ -141,7 +140,3 @@ class TLClassifier(object):
                 
         return state
         
-    # def load_image_into_numpy_array(self, image):
-
-    #     (im_width, im_height) = image.size
-    #     return np.array(image.getdata()).reshape((im_height, im_width, 3)).astype(np.uint8)
