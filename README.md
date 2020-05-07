@@ -64,7 +64,9 @@ Carla can be divided into several subsystems:
 
 ### 2a. Detection
   
-  To be written....
+  Detection is important to allow the car to make critical detailed decisions regarding traffic lights, traffic signs, pedistrians, lane line, etc. It is the foundation how the brain of the car functions.
+
+  This project focuses on the traffic light detection aspect of detection in order to make behavioural decisions about up-coming traffic lights. The approach to train a feasible model was to perform ***Transfer Learning*** on a preexisting MobileNet Classifier from Tensorflow's Object Detection API. Our classifier was modelled after how [Alex Lechner](https://github.com/alex-lechner/Traffic-Light-Classification) created his own model.
 
 ### 2b. Localization
 
