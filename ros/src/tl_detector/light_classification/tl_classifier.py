@@ -12,7 +12,7 @@ from styx_msgs.msg import TrafficLight
 from sensor_msgs.msg import Image
 
 THRESHOLD_SCORE = 0.6
-NUM_CLASSES = 3
+NUM_CLASSES = 4
 class TLClassifier(object):
 
     def __init__(self, is_site):
