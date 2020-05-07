@@ -139,4 +139,3 @@ class TLClassifier(object):
                     state = TrafficLight.YELLOW
                 
         return state
-        
