@@ -9,7 +9,7 @@ from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import Int32
 from styx_msgs.msg import Lane, Waypoint
 
-LOOKAHEAD_WPS = 75 # Number of waypoints we will publish.
+LOOKAHEAD_WPS = 200 # Number of waypoints we will publish.
 MAX_DECEL = 0.5 # m/s^2 Max Deceleration
 HZ_SETTING = 50 # Hz Publishing Rate
 STOP_NUM_WP_BACK = 2 # How many waypoints must the car stop before light
@@ -132,11 +132,23 @@ class WaypointUpdater(object):
         farthest_idx = closest_idx + LOOKAHEAD_WPS
         base_waypoints = self.base_lane.waypoints[closest_idx:farthest_idx]
 
-        # If there is no traffic light nearby, continue path.
-        if (self.stopline_wp_idx == -1) or (self.stopline_wp_idx >= farthest_idx):
+        # If there is no traffic light nearby or green light, continue path. 
+        if self.stopline_wp_idx >= farthest_idx:
             lane.waypoints = base_waypoints
-        
-        # Else plan for deceleration
+
+        # If yellow light
+        elif self.stopline_wp_idx < 0:
+            stop_idx = min(max(self.stopline_wp_idx - closest_idx - 2, 0), len(base_waypoints)-1)
+            dist_to_yellow = self.distance(base_waypoints, 0, stop_idx)
+
+            # Run yellow if feasible
+            if dist_to_yellow < 2.5 * base_waypoints[0].twist.twist.linear.x:
+                lane.waypoints = base_waypoints
+            # Else stop
+            else:
+                lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
+
+        # Red Light, plan for deceleration
         else:
             lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
         
