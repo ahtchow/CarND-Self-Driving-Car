@@ -49,7 +49,7 @@ Carla can be divided into several subsystems:
 
 ***Figure 3: A visualization of Carla's autonomous subsystems.*** *The four modules work independently but exchange data via robot operating system (ROS) nodes.*
 
-## 1. Senors
+## 1. Sensors
 
   Sensors are the hardware components the car uses to observe the world around it. Carla uses several sensors such as GPS, IMU, Radar, and Lidar. In addition, several cameras can be also used to provide imaging of the driving path. In industry, autonomous vehicles rely on Radar and Lidar sensors to provide the distance to the nearest objects. On the flipside, the GPU provides the global coordinates of the car in order to provide a mapping reference. The inertial measure unit (IMU) is useful to measure any positional or angular displacements.
 
