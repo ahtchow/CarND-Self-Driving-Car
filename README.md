@@ -6,6 +6,8 @@
 
 The purpose of this capstone project is to combine the skills garnered by the students in Udacity's Self-driving Car Engineering Nanodegree in order to program Carla, Udacity's self-driving car platform.  The students combined skills in computer vision, vehicle control systems, and integration through the Robot Operating System ([ROS](https://www.ros.org>)) in order to drive the car around a test track.
 
+Please check out the youtube video of the car running in the simulator: [Youtube Video](https://youtu.be/iVOKZHttAR8)
+
 ## Project Goal
 
 The following project aims to develop a coherent system that can communicate and perform tasks at a scaled-down level from an full-scale autonomous vehicle.
@@ -20,12 +22,12 @@ The project operates on two stages: A Unity Simulator and Udacity's Autonomous V
 
 ### 1. Unity Simulator
 
-Unity Game Engine allows Udacity to provide a simulated environment for students to test their software on. In this case, the simulator presented a virtual 3D environment with several traffic lanes and traffic lights. As a result, students can perform a validation check to whether their car stays in a given lane or stops before a traffic light. Simulation is a standard measure for testing performance and safety for many automotive applications. Testing software on simulation before implementation on a real autonomous vehicle is the reality that many self-driving car companies such as NVIDIA, Uber and Mercedes. 
+Unity Game Engine allows Udacity to provide a simulated environment for students to test their software on. In this case, the simulator presented a virtual 3D environment with several traffic lanes and traffic lights. As a result, students can perform a validation check to whether their car stays in a given lane or stops before a traffic light. Simulation is a standard measure for testing performance and safety for many automotive applications. Testing software on simulation before implementation on a real autonomous vehicle is the reality that many self-driving car companies such as NVIDIA, Uber and Mercedes.
 
 ![Figure 1](./Notes/README_Imgs/simulation.png)
 ***Figure 1: Simulator showing car under autonomous mode.*** *Carla, Udacity's Autnomous Vehicle, driving in the simulator in autonomous mode. On the left is a dashboard display and a stream of the car's camera.*
 
-### 2. Carla, Udacity's Self-Driving Car Platform 
+### 2. Carla, Udacity's Self-Driving Car Platform
 
 Upon passing anticipated behaviours on simulation, the software is then ready to be tested on Carla. It is important to note that the environment is signafigantly different from the simulation. To begin, the track is different from what is seen in the simulator which should be fine. In addition, the traffic lights on the real test track were different such that there must be a object detection model taylored to real-life data. (See below)
 
@@ -42,19 +44,19 @@ Carla can be divided into several subsystems:
   2. ***Perception***
   3. ***Planning***
   4. ***Control***
-  
+
 ![Figure 3](./Notes/README_Imgs/carla_architecture.png)
 
 ***Figure 3: A visualization of Carla's autonomous subsystems.*** *The four modules work independently but exchange data via robot operating system (ROS) nodes.*
 
 ## 1. Senors
 
-  Sensors are the hardware components the car uses to observe the world around it. Carla uses several sensors such as GPS, IMU, Radar, and Lidar. In addition, several cameras can be also used to provide imaging of the driving path. In industry, autonomous vehicles rely on Radar and Lidar sensors to provide the distance to the nearest objects. On the flipside, the GPU provides the global coordinates of the car in order to provide a mapping reference. The inertial measure unit (IMU) is useful to measure any positional or angular displacements. 
+  Sensors are the hardware components the car uses to observe the world around it. Carla uses several sensors such as GPS, IMU, Radar, and Lidar. In addition, several cameras can be also used to provide imaging of the driving path. In industry, autonomous vehicles rely on Radar and Lidar sensors to provide the distance to the nearest objects. On the flipside, the GPU provides the global coordinates of the car in order to provide a mapping reference. The inertial measure unit (IMU) is useful to measure any positional or angular displacements.
 
   The project mainly uses the camera images to process information about possible on-coming traffic lights. This information is then processed to the perception sub-system.
 
   ![Figure 4](./Notes/README_Imgs/lidar_pc.png)
-  
+
   ***Figure 4: A visualization of a point cloud mapping provided from a LIDAR sensor.*** *Lidar is one of the many sensors Carla uses to gather information about the world around.*
 
 ## 2. Perception
@@ -63,7 +65,7 @@ Carla can be divided into several subsystems:
 
 
 ### 2a. Detection
-  
+
   Detection is important to allow the car to make critical detailed decisions regarding traffic lights, traffic signs, pedistrians, lane line, etc. It is the foundation how the brain of the car functions.
 
   This project focuses on the traffic light detection aspect of detection in order to make behavioural decisions about up-coming traffic lights. The approach to train a feasible model was to perform ***Transfer Learning*** on a preexisting MobileNet Classifier from Tensorflow's Object Detection API. Our classifier was modelled after how [Alex Lechner](https://github.com/alex-lechner/Traffic-Light-Classification) created his own model. Two models were created using the dataset Alex was provided from Udacity, one for the simulator and one for the real test track. The SSD Inception V2 Model was used as the basis of the classifier. Below you can see the results tested in a Jupyter Notebook:
@@ -89,9 +91,9 @@ Real Test Track            |  Simulator                |
   1. ***Route Planning***
     - Responsible for high-level decisions about the path of the vehicle between two points on a map.
     - Component is similar to the route planning feature found on many smartphones or modern car navigation systems.
-            
+
   2. ***Prediction Planning***
-    - Prediction component estimates what actions other objects might take in the future. 
+    - Prediction component estimates what actions other objects might take in the future.
     - If another vehicle were identified, the prediction component would estimate its trajectory
 
   3. ***Behavioural Planning***
@@ -123,7 +125,7 @@ Real Test Track            |  Simulator                |
 
 # Software Platform: Robotic Operating System
 
-What is ROS? The Robot Operating System (ROS) is a set of software libraries and tools that help you build robot applications. From drivers to state-of-the-art algorithms, and with powerful developer tools, ROS has what you need for your next robotics project. And it's all open source. 
+What is ROS? The Robot Operating System (ROS) is a set of software libraries and tools that help you build robot applications. From drivers to state-of-the-art algorithms, and with powerful developer tools, ROS has what you need for your next robotics project. And it's all open source.
 
 For the purpose of this project, ROS is used specifically for the ability for different sub-systems to communicate. This is done through "nodes", which is essential a module that performs a certain task (computation). Different nodes are allows to communicate to each other to exist as a coherent system.
 
@@ -133,7 +135,7 @@ For the purpose of this project, ROS is used specifically for the ability for di
 
 Nodes in the project:
 
-  1. ***Drive-By-Wire Node*** 
+  1. ***Drive-By-Wire Node***
   * Purpose: Publish steering, throttle and braking commands to the car.
 
   2. ***Waypoint Loader Node***
@@ -150,7 +152,7 @@ Nodes in the project:
 
   6. ***Dashboard Display Node***
   * Purpose: Streams the car's metrics to the terminal.
-  
+
 
 # Installation
 
